@@ -333,6 +333,7 @@
       // return the right zone info based on `start/index`.
       getZone (index) {
         let start
+        let end
         const delta = this.delta
 
         index = parseInt(index, 10)
@@ -347,8 +348,13 @@
           start = index
         }
 
+        end = start + delta.keeps - 1
+        if (end > delta.total) {
+          end = delta.total - 1
+        }
+
         return {
-          end: start + delta.keeps - 1,
+          end,
           start,
           isLast
         }
